@@ -8,11 +8,22 @@
 
 require "faker"
 
+User.destroy_all
+
 u1 = User.create(email:"test@test.com", password: 123456)
 
 10.times do
-  User.create(
+  u1.comments.create(comment: Faker::Quote.famous_last_words)
+end
+
+10.times do
+  user = User.create(
     email:Faker::Internet.unique.email, 
     password: Faker::Internet.password(min_length: 6),
   )
+  10.times do
+    user.comments.create(
+      comment: Faker::Quote.famous_last_words
+    )
+  end
 end
