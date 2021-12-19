@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :users, only: [:index, :update] do
+      get 'my_friends', to: 'users#my_friends'
       resources :comments
     end
   end

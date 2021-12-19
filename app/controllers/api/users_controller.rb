@@ -11,5 +11,9 @@ class Api::UsersController < ApplicationController
     current_user.save
   end
 
+  def my_friends
+    render json: User.user_friends(current_user.friends)
+  end
+
 
 end

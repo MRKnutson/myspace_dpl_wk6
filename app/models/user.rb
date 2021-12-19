@@ -14,11 +14,11 @@ class User < ActiveRecord::Base
   # class method
   def self.not_friends(ids)
     ids = ids.empty? ? [0] : ids
-    User.where("id NOT IN (?), ids").order("RANDOM()")
+    User.where("id NOT IN (?)", ids).order("RANDOM()")
   end
 
   def self.user_friends(ids)
     ids = ids.empty? ? [0] : ids
-    Cat.where("id IN (?)", ids)
+    User.where("id IN (?)", ids)
   end
 end
