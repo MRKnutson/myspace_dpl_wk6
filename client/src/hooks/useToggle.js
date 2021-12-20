@@ -7,7 +7,7 @@ const useToggle = (initialState = true) => {
     setToggle(!showToggle)
   };
 
-  return{ showToggle, Toggler};
+  return[ showToggle, Toggler];
 };
 
 export default useToggle

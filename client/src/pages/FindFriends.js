@@ -81,7 +81,7 @@ const FindFriends = () => {
   )
 };
 
-const SpacedButton = styled(Button)`
+export const SpacedButton = styled(Button)`
   margin: 10px;
 `
 
