@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_12_17_223625) do
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.string "comment"
+    t.string "body"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 2021_12_17_223625) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.text "friends"
-    t.text "comments"
     t.text "liked_comments"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
