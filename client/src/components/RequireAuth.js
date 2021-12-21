@@ -14,11 +14,13 @@ const RequireAuth = () => {
   const checkAuthStatus = async () => {
     if(auth.authenticated || !localStorage.getItem('access-token')){
       setCheckingAuthStatus(false);
+      auth.getNotFriends()
       return;
     }
     try {
       const res = await axios.get("/api/auth/validate_token");
       auth.setUser(res.data.data);
+      auth.getNotFriends()
     } catch (err) {
       console.log('unable to validate token')
     } finally {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export const AuthContext = React.createContext();
@@ -7,11 +7,26 @@ export const AuthConsumer = AuthContext.Consumer;
 
 const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
+  const [notFriends, setNotFriends] = useState([]);
+
+  // useEffect(()=>{
+  //   getNotFriends();
+  // },[]);
+
+  const getNotFriends = async () =>{
+    try {
+      let response = await axios.get('/api/users')
+      setNotFriends(response.data)
+    } catch (err) {
+      alert('error getting Not Friends')
+    }
+  };
 
   const handleRegister = async (user, navigate)=>{
     try {
       let response = await axios.post('api/auth', user);
       setUser(response.data.data)
+      getNotFriends()
       navigate('/')
     } catch (err) {
       console.log(err.response.data.errors.full_messages)
@@ -23,6 +38,7 @@ const AuthProvider = (props) => {
     try{
       let response = await axios.post('/api/auth/sign_in', user);
       setUser(response.data.data)
+      getNotFriends()
       navigate("/")
     } catch (err) {
       console.log(err.response.data.errors.full_messages)
@@ -46,6 +62,9 @@ const AuthProvider = (props) => {
     <AuthContext.Provider value ={{
       ...user,
       setUser,
+      getNotFriends,
+      notFriends,
+      setNotFriends,
       handleRegister,
       handleLogin,
       handleLogout,

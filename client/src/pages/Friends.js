@@ -4,8 +4,8 @@ import { Card, CardGroup, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import RenderJson from '../components/RenderJson';
+import { LinkButton, RaisedCard, SpacedButton } from '../components/Styles';
 import { AuthContext } from '../providers/AuthProvider';
-import { SpacedButton } from './FindFriends';
 
 const Friends = () => {
   const [friends, setFriends] = useState([]);
@@ -37,7 +37,7 @@ const Friends = () => {
   const renderFriends = () => {
     return friends.map((friend)=>{
       return(
-        <Card className = "text-center mx-1" key={friend.id} style={{maxWidth: "36rem", minWidth: '18rem'}}>
+        <RaisedCard className = "text-center mx-1 mb-2" key={friend.id} style={{maxWidth: "36rem", minWidth: '18rem'}}>
           <Card.Img variant = "top" src={friend.image} />
         <Card.Body>
           <Card.Title>{friend.nickname}</Card.Title>
@@ -53,7 +53,7 @@ const Friends = () => {
           </SpacedButton>
           <SpacedButton onClick = {()=>removeFriend(friend.id)}>Unfriend</SpacedButton>
         </Card.Footer>
-      </Card>
+      </RaisedCard>
       )
     })
   };
@@ -72,12 +72,3 @@ const Friends = () => {
 
 export default Friends;
 
-const LinkButton = styled(Link)`
-  text-decoration: none;
-  color: white;
-  &:hover {
-    color: #c2c2c2;
-  }
-  }
-
-`

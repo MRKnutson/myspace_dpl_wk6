@@ -3,9 +3,9 @@ import { Button, Card, CardGroup, Col, Container, Row } from 'react-bootstrap'
 import React, { useContext, useEffect, useState } from 'react'
 import RenderJson from '../components/RenderJson';
 import { AuthContext } from '../providers/AuthProvider';
-import { SpacedButton } from './FindFriends';
 import CommentForm from '../components/CommentForm';
 import useToggle from '../hooks/useToggle'
+import { SpacedButton } from '../components/Styles';
 
 const Home =  () => {
   const auth = useContext(AuthContext)

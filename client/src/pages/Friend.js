@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, CardGroup, Container } from 'react-bootstrap';
 import { useLocation} from 'react-router-dom'
 import RenderJson from '../components/RenderJson';
-import { SpacedButton } from './FindFriends';
+import { RaisedCard, SpacedButton } from '../components/Styles';
 
 const Friend = () => {
   const location = useLocation()
@@ -11,13 +11,13 @@ const Friend = () => {
   const renderComments = () => {
     return friend.comments.map((c)=>{
       return(
-        <Card className = "text-center mx-1" key={c.id} style={{width: "99%"}}>
+        <RaisedCard className = "text-center mx-1 mb-2" key={c.id} style={{width: "99%"}}>
         <Card.Body>
           <Card.Text>
             {c.body}
           </Card.Text>
         </Card.Body>
-      </Card>
+      </RaisedCard>
       )
     })
   };
@@ -25,7 +25,7 @@ const Friend = () => {
   return(
     <Container fluid = "sm">
       <h1>{friend.nickname}</h1>
-      <Card className = "text-center mx-1" key={friend.id} style={{Width: '80%'}}>
+      <RaisedCard className = "text-center mx-1 mb-2" key={friend.id} style={{Width: '80%'}}>
           <Card.Img variant = "top" src={friend.image} />
         <Card.Body>
           <Card.Title>{friend.nickname}</Card.Title>
@@ -40,7 +40,14 @@ const Friend = () => {
             Remove Friend?
           </SpacedButton>
         </Card.Footer>
-      </Card>
+      </RaisedCard>
+      <RaisedCard className = "text-center mx-1 mb-2"  style={{width: "99%", background: "#4946f2"}}>
+        <Card.Body>
+          <Card.Title style={{color: "white"}}>
+            Posts
+          </Card.Title>
+        </Card.Body>
+      </RaisedCard>
         {renderComments()}
     </Container>
   )

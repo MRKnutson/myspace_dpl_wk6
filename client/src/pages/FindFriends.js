@@ -1,36 +1,33 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {Button, Card, CardGroup, Container} from 'react-bootstrap'
 import styled from 'styled-components';
 import RenderJson from '../components/RenderJson';
+import { RaisedCard, SpacedButton } from '../components/Styles';
+import { AuthContext } from '../providers/AuthProvider';
 
 const FindFriends = () => {
-  const [notFriends, setNotFriends] = useState([])
+  // const [notFriends, setNotFriends] = useState([])
+  const [users, setUsers] = useState([])
+
+  const auth = useContext(AuthContext)
 
   useEffect(()=>{
-    getNotFriends();
-  },[]);
-
-  const getNotFriends = async () =>{
-    try {
-      let response = await axios.get('/api/users')
-      setNotFriends(response.data)
-    } catch (err) {
-      alert('error getting Not Friends')
-    }
-  };
+    console.log(auth)
+    uniqueSamples()
+  },[auth.notFriends]);
 
   const sample = () => {
-    if(notFriends.length){
-      const index =  Math.floor(Math.random() * notFriends.length)
-      return notFriends[index];
+    if(auth.notFriends.length){
+      const index =  Math.floor(Math.random() * auth.notFriends.length)
+      return auth.notFriends[index];
     }
     return null;
   };
 
   const uniqueSamples = () => {
-    let uniqueSample = [...new Set([sample(), sample(), sample()])]
-    return uniqueSample
+    let uniqueSample = [...new Set([sample(), sample(), sample(), sample(), sample(), sample()])]
+    setUsers(uniqueSample.slice(0,3))
   };
 
   const addFriend= async (id)=>{
@@ -43,8 +40,8 @@ const FindFriends = () => {
   };
 
   const removeUser = (id) => {
-    const filteredUsers=notFriends.filter((user) => user.id !== id)
-    setNotFriends(filteredUsers)
+    const filteredUsers=auth.notFriends.filter((user) => user.id !== id)
+    auth.setNotFriends(filteredUsers)
   };
 
   const renderUser = () => {
@@ -53,10 +50,9 @@ const FindFriends = () => {
       return<p>no new friends available</p>
     }
     return (
-      <Card 
-        className = "text-center mx-1"
-        bg = "secondary"
-        text = "light"
+      <RaisedCard 
+        className = "text-center mx-1 mb-2" 
+        style={{Width: '80%'}}
       >
         <Card.Header>
           <Card.Img variant = "top" src={user.image} />
@@ -69,24 +65,47 @@ const FindFriends = () => {
           <SpacedButton onClick = {()=>addFriend(user.id)}>Add Friend</SpacedButton>
           <SpacedButton onClick = {()=>removeUser(user.id)}>No Thanks</SpacedButton>
         </Card.Footer>
-      </Card>
+      </RaisedCard>
     )
+  };
+
+  const renderUsers = () => {
+    console.log(users)
+    if(users.length >1 && users[0] !== null ){
+    return users.map((u)=>{
+      return(
+        <RaisedCard 
+        key = {u.id}
+        className = "text-center mx-1 mb-2" 
+        style={{Width: '80%'}}
+      >
+        <Card.Header>
+          <Card.Img variant = "top" src={u.image} />
+        </Card.Header>
+        <Card.Body>
+          <Card.Title>{u.nickname}</Card.Title>
+          <Card.Text>{u.email} {' '}</Card.Text>
+        </Card.Body>
+        <Card.Footer>
+          <SpacedButton onClick = {()=>addFriend(u.id)}>Add Friend</SpacedButton>
+          <SpacedButton onClick = {()=>removeUser(u.id)}>No Thanks</SpacedButton>
+        </Card.Footer>
+      </RaisedCard>
+      )
+    })}
   };
 
   return(
     <Container>
       <h1>Meet New Peeps!</h1>
       <CardGroup>
+        {/* {renderUser()}
         {renderUser()}
-        {renderUser()}
-        {renderUser()}
+        {renderUser()} */}
+        {users.length>0 && users[0] !== null ? renderUsers() : <p>You Suck!</p>}
       </CardGroup>
     </Container>
   )
 };
-
-export const SpacedButton = styled(Button)`
-  margin: 10px;
-`
 
 export default FindFriends;
