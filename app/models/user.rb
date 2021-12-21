@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
 
   def self.user_friends(ids)
     ids = ids.empty? ? [0] : ids
-    User.where("id IN (?)", ids)
+    friends = User.where("id IN (?)", ids)
+    friends.map do |friend|
+      {id: friend.id, email: friend.email, nickname: friend.nickname, image: friend.image, comments: friend.comments.reverse}
+    end
   end
 end

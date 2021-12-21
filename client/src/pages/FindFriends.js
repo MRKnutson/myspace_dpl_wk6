@@ -28,6 +28,11 @@ const FindFriends = () => {
     return null;
   };
 
+  const uniqueSamples = () => {
+    let uniqueSample = [...new Set([sample(), sample(), sample()])]
+    return uniqueSample
+  };
+
   const addFriend= async (id)=>{
     try {
       await axios.put(`/api/users/${id}`)
@@ -35,7 +40,6 @@ const FindFriends = () => {
     } catch (err) {
       alert("unable to add friend")
     }
-    console.log(id)
   };
 
   const removeUser = (id) => {

@@ -33,10 +33,10 @@ const CommentForm = (props) => {
 
   return(
     <Form onSubmit={handleSubmit}>
-      <FloatingLabel controlId="floatingTextarea2" label={props.comment_id ? "Comment" : "New Comment"}>
+      <FloatingLabel controlId="floatingTextarea2" label={props.comment_id ? "Post" : "New Post"}>
         <Form.Control
           as="textarea"
-          placeholder="Leave a comment here"
+          placeholder="Leave a post here"
           value = {currentComment}
           onChange = {(e)=>setCurrentComment(e.target.value)}
           style={{ height: '100px' }}

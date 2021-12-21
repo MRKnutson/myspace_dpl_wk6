@@ -8,15 +8,17 @@ import Protected from './pages/Protected';
 import RequireAuth from './components/RequireAuth';
 import FindFriends from './pages/FindFriends';
 import Friends from './pages/Friends';
+import Friend from './pages/Friend';
 
 function App() {
   return (
     <Routes>
       <Route element ={<Layout />}>
-        <Route path = "/" element = {<Home />} />
         <Route path = "/register" element = {<Register />} />
         <Route path = "/login" element = {<Login />} />
         <Route element = {<RequireAuth />}>
+          <Route path = "/" element = {<Home />} />
+          <Route path= "/friend" element = {<Friend />} />
           <Route path= "/friends" element = {<Friends />} />
           <Route path= "/findfriends" element = {<FindFriends />} />
           <Route path = "/protected" element = {<Protected />} />
