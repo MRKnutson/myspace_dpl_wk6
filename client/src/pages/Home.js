@@ -5,7 +5,7 @@ import RenderJson from '../components/RenderJson';
 import { AuthContext } from '../providers/AuthProvider';
 import CommentForm from '../components/CommentForm';
 import useToggle from '../hooks/useToggle'
-import { SpacedButton } from '../components/Styles';
+import { RaisedCard, SpacedButton } from '../components/Styles';
 
 const Home =  () => {
   const auth = useContext(AuthContext)
@@ -63,15 +63,15 @@ const Home =  () => {
   return(
     <Container>
       <h1>Profile</h1>
-      <Card className = "text-center mx-1" >
-        <Card.Img variant="top" src={auth.image} />
+      <RaisedCard style ={{width: "30rem"}} className = "text-center mx-1" >
+        <Card.Img variant="top" src={auth.image}/>
         <Card.Body>
           <Card.Title>{auth.nickname}</Card.Title>
           <Card.Text>
             {auth.email}
           </Card.Text>
         </Card.Body>
-      </Card>
+      </RaisedCard>
       <hr />
       <CardGroup>
           {renderComments()}

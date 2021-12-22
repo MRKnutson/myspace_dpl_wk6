@@ -12,7 +12,10 @@ const Layout = () => {
   const renderUILinks =()=>{
     if(authenticated){
       return(
-        <Button onClick={()=>handleLogout(navigate)}>Logout</Button>
+        <>
+          <Nav.Link eventKey = "/account">Account</Nav.Link>
+          <Button onClick={()=>handleLogout(navigate)}>Logout</Button>
+        </>
       )
     } else {
       return(
@@ -46,7 +49,7 @@ const Layout = () => {
               <Nav.Link eventKey = "/">Profile</Nav.Link>
               <Nav.Link eventKey = "/friends">Friends</Nav.Link>
               <Nav.Link eventKey = "/findfriends">Find Friends</Nav.Link>
-              {/* <Nav.Link eventKey = "/protected">Protected</Nav.Link> */}
+              
             </Nav>
             <Nav className="justify-content-end" onSelect = {handleSelect}>
               {renderUILinks()}

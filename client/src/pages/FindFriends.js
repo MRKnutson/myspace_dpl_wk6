@@ -44,31 +44,6 @@ const FindFriends = () => {
     auth.setNotFriends(filteredUsers)
   };
 
-  const renderUser = () => {
-    let user = sample();
-    if(!user){
-      return<p>no new friends available</p>
-    }
-    return (
-      <RaisedCard 
-        className = "text-center mx-1 mb-2" 
-        style={{Width: '80%'}}
-      >
-        <Card.Header>
-          <Card.Img variant = "top" src={user.image} />
-        </Card.Header>
-        <Card.Body>
-          <Card.Title>{user.nickname}</Card.Title>
-          <Card.Text>{user.email} {' '}</Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <SpacedButton onClick = {()=>addFriend(user.id)}>Add Friend</SpacedButton>
-          <SpacedButton onClick = {()=>removeUser(user.id)}>No Thanks</SpacedButton>
-        </Card.Footer>
-      </RaisedCard>
-    )
-  };
-
   const renderUsers = () => {
     console.log(users)
     if(users.length >1 && users[0] !== null ){
@@ -99,9 +74,6 @@ const FindFriends = () => {
     <Container>
       <h1>Meet New Peeps!</h1>
       <CardGroup>
-        {/* {renderUser()}
-        {renderUser()}
-        {renderUser()} */}
         {users.length>0 && users[0] !== null ? renderUsers() : <p>You Suck!</p>}
       </CardGroup>
     </Container>

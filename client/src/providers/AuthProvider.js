@@ -34,6 +34,26 @@ const AuthProvider = (props) => {
     }
   };
 
+  const handleUpdateUser= async (user, navigate)=>{
+    try {
+      let response = await axios.put('/api/auth', user);
+      setUser(response.data.data)
+      getNotFriends()
+      console.log("user: ", user)
+      console.log("response: ", response.data.data)
+      navigate('/')
+    } catch (err) {
+      console.log(err.response.data.errors.full_messages)
+      alert(err.response.data.errors.full_messages)
+    }
+  };
+
+  const handleDeleteAccount = async (navigate)=> {
+    let response = await axios.delete("/api/auth");
+    setUser(null);
+    navigate('/register')
+  };
+
   const handleLogin = async (user, navigate)=>{
     try{
       let response = await axios.post('/api/auth/sign_in', user);
@@ -68,6 +88,8 @@ const AuthProvider = (props) => {
       handleRegister,
       handleLogin,
       handleLogout,
+      handleUpdateUser,
+      handleDeleteAccount,
       authenticated: user !== null,
     }}>
       {props.children}

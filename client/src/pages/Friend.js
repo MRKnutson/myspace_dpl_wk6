@@ -1,10 +1,11 @@
+import axios from 'axios';
 import React from 'react'
-import { Card, CardGroup, Container } from 'react-bootstrap';
-import { useLocation} from 'react-router-dom'
-import RenderJson from '../components/RenderJson';
+import { Card, Container } from 'react-bootstrap';
+import { useLocation, useNavigate} from 'react-router-dom'
 import { RaisedCard, SpacedButton } from '../components/Styles';
 
 const Friend = () => {
+  const navigate = useNavigate()
   const location = useLocation()
   const friend = location.state
 
@@ -22,6 +23,15 @@ const Friend = () => {
     })
   };
 
+  const handleFriendRemoval= async (id) =>{
+    try {
+      let res = await axios.delete(`/api/users/${id}`)
+      navigate("/friends")
+    } catch (err) {
+      alert('error removing friend')
+    }
+  };
+
   return(
     <Container fluid = "sm">
       <h1>{friend.nickname}</h1>
@@ -36,8 +46,8 @@ const Friend = () => {
           </Card.Text>
         </Card.Body>
         <Card.Footer>
-          <SpacedButton>
-            Remove Friend?
+          <SpacedButton onClick = {()=>handleFriendRemoval(friend.id)}>
+            Remove Friend
           </SpacedButton>
         </Card.Footer>
       </RaisedCard>

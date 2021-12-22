@@ -4,11 +4,11 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Layout from './components/Layout';
-import Protected from './pages/Protected';
 import RequireAuth from './components/RequireAuth';
 import FindFriends from './pages/FindFriends';
 import Friends from './pages/Friends';
 import Friend from './pages/Friend';
+import Account from './pages/Protected';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           <Route path= "/friend" element = {<Friend />} />
           <Route path= "/friends" element = {<Friends />} />
           <Route path= "/findfriends" element = {<FindFriends />} />
-          <Route path = "/protected" element = {<Protected />} />
+          <Route path = "/account" element = {<Account />} />
         </Route>
       </Route>
     </Routes>
