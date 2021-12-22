@@ -12,7 +12,7 @@ const Friend = () => {
   const renderComments = () => {
     return friend.comments.map((c)=>{
       return(
-        <RaisedCard className = "text-center mx-1 mb-2" key={c.id} style={{width: "99%"}}>
+        <RaisedCard className = "text-center mx-1 mb-2" key={c.id} >
         <Card.Body>
           <Card.Text>
             {c.body}

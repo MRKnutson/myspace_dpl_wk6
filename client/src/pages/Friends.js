@@ -65,7 +65,6 @@ const Friends = () => {
       <CardGroup>
         {renderFriends()}
       </CardGroup>
-      <RenderJson json = {friends} />
     </Container>
   )
 };

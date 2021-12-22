@@ -63,7 +63,7 @@ const Home =  () => {
   return(
     <Container>
       <h1>Profile</h1>
-      <RaisedCard style ={{width: "30rem"}} className = "text-center mx-1" >
+      <RaisedCard className = "text-center mx-1" >
         <Card.Img variant="top" src={auth.image}/>
         <Card.Body>
           <Card.Title>{auth.nickname}</Card.Title>

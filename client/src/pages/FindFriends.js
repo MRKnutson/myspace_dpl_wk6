@@ -1,19 +1,15 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
-import {Button, Card, CardGroup, Container} from 'react-bootstrap'
-import styled from 'styled-components';
-import RenderJson from '../components/RenderJson';
+import {Card, CardGroup, Container} from 'react-bootstrap'
 import { RaisedCard, SpacedButton } from '../components/Styles';
 import { AuthContext } from '../providers/AuthProvider';
 
 const FindFriends = () => {
-  // const [notFriends, setNotFriends] = useState([])
   const [users, setUsers] = useState([])
 
   const auth = useContext(AuthContext)
 
   useEffect(()=>{
-    console.log(auth)
     uniqueSamples()
   },[auth.notFriends]);
 
@@ -45,14 +41,12 @@ const FindFriends = () => {
   };
 
   const renderUsers = () => {
-    console.log(users)
     if(users.length >1 && users[0] !== null ){
     return users.map((u)=>{
       return(
         <RaisedCard 
         key = {u.id}
         className = "text-center mx-1 mb-2" 
-        style={{Width: '80%'}}
       >
         <Card.Header>
           <Card.Img variant = "top" src={u.image} />
@@ -74,7 +68,7 @@ const FindFriends = () => {
     <Container>
       <h1>Meet New Peeps!</h1>
       <CardGroup>
-        {users.length>0 && users[0] !== null ? renderUsers() : <p>You Suck!</p>}
+        {users.length>0 && users[0] !== null ? renderUsers() : <p>Unable to find new friends</p>}
       </CardGroup>
     </Container>
   )
